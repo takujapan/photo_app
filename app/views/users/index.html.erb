@@ -2,10 +2,10 @@
 
 <section class="section">
   <div class="container">
-    <div class="columns users-card is-multiline">
+    <div class="columns is-multiline">
       <% @users.each do |user| %>
-        <div class="column is-5">
-          <div class="card mb-6">
+        <div class="column is-3">
+          <div class="card">
             <div class="card-content">
               <div class="card-image">
                 <figure class="image">
@@ -18,11 +18,11 @@
             <div class="card-content">
               <div class="media">
                 <div class="media-content">
-                  <div class="title"><%= link_to user.username, user_path(user) %></div>
+                  <div class="title"><%=link_to user.username, user_path(user) %></div>
                 </div>
               </div>
               <div class="content">
-                投稿数：あとで
+                投稿数：<%= user.photos.count %>
               </div>
             </div>
           </div>

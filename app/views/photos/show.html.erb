@@ -1,0 +1,35 @@
+<% provide(:title, "Show") %>
+
+<section class="section">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-7">
+        <div class="card mb-6">
+          <div class="card-image">
+            <figure class="image is-5by4">
+              <%= attachment_image_tag @photo, :image %>
+            </figure>
+          </div>
+          <div class="card-content">
+            <div class="is-size-3">
+              <%= link_to user_path(@photo.user) do %>
+                <%= @photo.user.username %>
+              <% end %>
+            </div>
+            <div>
+              <p><%= simple_format @photo.caption %></p>
+            </div>
+            <div class="has-text-right"> 
+              <% if @photo.user.id == current_user.id %>
+                <%= link_to "編集", edit_photo_path(@photo), class: "button is-default" %>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+

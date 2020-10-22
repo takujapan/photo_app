@@ -40,5 +40,49 @@
   </div>
 </section>
 
-
-
+<section class="section">
+  <div class="container">
+    <div class="columns is-multiline">
+      <% @user.photos.each do |photo| %>
+        <div class="column is-4">
+          <div class="card">
+            <div class="card-image">
+              <figure class="image is-4by3">
+                <%= attachment_image_tag photo, :image %>
+              </figure>
+            </div>
+            <div class="card-content">
+              <div class="media">
+                <div class="media-content">
+                  <%= link_to photo_path(photo), class: "panel-block" do %>
+                    <span class="panel-icon">
+                      <i class="fas fa-book" aria-hidden="true"></i>
+                    </span>
+                    写真を見る
+                  <% end %>
+                  <% if @user.id == current_user.id %>
+                    <%= link_to edit_photo_path(photo), class: "panel-block" do %>
+                      <span class="panel-icon">
+                        <i class="fas fa-edit"></i>
+                      </span>
+                      写真を編集する
+                    <% end %>
+                    <%= link_to photo_path(photo), method: :delete, data: {confirm: "削除しますか？"}, class: "panel-block" do %>
+                      <span class="panel-icon">
+                        <i class="fas fa-trash"></i>
+                      </span>
+                      写真を削除する
+                    <% end %>
+                  <% end %>
+                </div>
+              </div>
+              <div class="content is-size-7 has-text-weight-light">
+                <%= photo.updated_at.strftime("%Y-%m-%d %H:%M") %>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</section>
