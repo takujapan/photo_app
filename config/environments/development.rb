@@ -59,4 +59,10 @@ Rails.application.configure do
   # Use an evented file watcher to asynchronously detect changes in source code,
   # routes, locales, etc. This feature depends on the listen gem.
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
+  
+  # Cloud9 への接続を許可する
+  config.hosts.clear
+  
+  #deviseの設定
+  config.action_mailer.default_url_options = { host: 'https://a96fdf07e7ca463a83cf7b59e1070881.vfs.cloud9.ap-northeast-1.amazonaws.com/', port: 3000 }
 end
