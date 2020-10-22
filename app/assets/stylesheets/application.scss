@@ -19,3 +19,13 @@
 .notification:not(:last-child){
 	margin-bottom: 0;
 }
+
+.navbar {
+  border-bottom: solid 2px whitesmoke;
+}
+
+.users-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}

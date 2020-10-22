@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>PhotoApp</title>
+    <title><%= full_title(yield(:title)) %></title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
     
@@ -43,6 +43,9 @@
             <div class="navbar-item">
               <div class="field is-grouped">
                 <p class="control">
+                  <%= link_to "ユーザー一覧", users_path, class: "button is-default" %>
+                </p>
+                <p class="control">
                   <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "button is-default" %>
                 </p>
               </div>
@@ -57,6 +60,9 @@
             <div class="navbar-item">
               <div class="field is-grouped">
                 <p class="control">
+                  <%= link_to "ユーザー一覧", users_path, class: "button is-default" %>
+                </p>
+                <p class="control">
                   <%= link_to "ログイン", new_user_session_path, class: "button is-default" %>
                 </p>
                 <p class="control">
@@ -68,7 +74,6 @@
         </div>
       <% end %>
     </nav>
-    <hr>
     <%= yield %>
   </body>
 </html>
