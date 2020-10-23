@@ -34,13 +34,22 @@
    border-radius: 50%;
    max-width: 7rem;
   max-height: 7rem;
+  border: 1px solid silver;
 }
 
-.home-photoapp {
+.home-title {
   font-size: 180px;
   color: white;
   text-shadow: 3px 3px 1px black;
-  margin-top: 100px;
+}
+
+.home-page .home-subtitle {
+  margin-top: 30px;
+}
+
+.home-subtitle {
+  font-size: 40px;
+  color: white;
 }
 
 .home-image {
@@ -52,4 +61,8 @@
 
 .heart_red {
   color: red;
+}
+
+.profile-color {
+  background-color: whitesmoke;
 }
