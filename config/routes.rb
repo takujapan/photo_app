@@ -4,7 +4,8 @@ Rails.application.routes.draw do
                                          
   root to: "homes#index"
   resources :users
-  resources :photos
-  
+  resources :photos do
+    resource :likes, only: [:create, :destroy]
+  end
   get 'after_login_to_post', to: 'users#show'
 end

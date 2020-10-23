@@ -11,6 +11,18 @@
             </figure>
           </div>
           <div class="card-content">
+            <div>
+                <% if current_user.already_liked?(@photo) %>
+                  <%= link_to photo_likes_path(@photo), method: :delete do %>
+                    <i class="fas fa-heart heart_red fa-2x"></i>
+                  <% end %>
+                <% else %>
+                  <%= link_to photo_likes_path(@photo), method: :post do %>
+                    <i class="far fa-heart heart_red fa-2x"></i>
+                  <% end %>
+                <% end %>
+                <%= @photo.likes.count %>
+              </div>
             <div class="is-size-3">
               <%= link_to user_path(@photo.user) do %>
                 <%= @photo.user.username %>

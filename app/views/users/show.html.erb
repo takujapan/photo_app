@@ -54,6 +54,16 @@
             <div class="card-content">
               <div class="media">
                 <div class="media-content">
+                    <% if current_user.already_liked?(photo) %>
+                      <%= link_to photo_likes_path(photo), method: :delete do %>
+                        <i class="fas fa-heart heart_red fa-lg"></i>
+                      <% end %>
+                    <% else %>
+                      <%= link_to photo_likes_path(photo), method: :post do %>
+                        <i class="far fa-heart heart_red fa-lg"></i>
+                      <% end %>
+                    <% end %>
+                    <%= photo.likes.count %>
                   <%= link_to photo_path(photo), class: "panel-block" do %>
                     <span class="panel-icon">
                       <i class="fas fa-book" aria-hidden="true"></i>
