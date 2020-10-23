@@ -45,7 +45,7 @@
 
 .home-image {
   height: 1000px;
-  background-image: url(/assets/photoapp.png);
+  background: image-url("photoapp.png");
   background-repeat: none;
   background-size: contain;
 }
