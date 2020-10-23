@@ -1,4 +1,6 @@
 class PhotosController < ApplicationController
+  before_action :authenticate_user!, except: [:index]
+  
   def index
     @photos = Photo.all
   end
@@ -14,18 +16,27 @@ class PhotosController < ApplicationController
   def create
     @photo = Photo.new(photo_params)
     @photo.user_id = current_user.id
-    @photo.save
-    redirect_to photo_path(@photo)
+    if @photo.save
+      redirect_to photo_path(@photo), notice: '投稿に成功しました'
+    else
+      render :new
+    end
   end
 
   def edit
     @photo = Photo.find(params[:id])
+    if @photo.user != current_user
+      redirect_to photos_path, alert: '不正なアクセスです。'
+    end
   end
   
   def update
     @photo = Photo.find(params[:id])
-    @photo.update(photo_params)
-    redirect_to photo_path(@photo)
+    if @photo.update(photo_params)
+      redirect_to photo_path(@photo), notice: '更新に成功しました'
+    else
+      render :edit
+    end
   end
   
   def destroy

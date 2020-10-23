@@ -35,3 +35,17 @@
    max-width: 7rem;
   max-height: 7rem;
 }
+
+.home-photoapp {
+  font-size: 180px;
+  color: white;
+  text-shadow: 3px 3px 1px black;
+  margin-top: 100px;
+}
+
+.home-image {
+  height: 1000px;
+  background-image: url(photoapp.png);
+  background-repeat: none;
+  background-size: contain;
+}
