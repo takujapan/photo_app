@@ -24,16 +24,18 @@
     <% end %>
     
     <nav class="navbar is-default">
-        <div class="navbar-brand">
-          <%= link_to root_path, class: "navbar-item" do %>
-            <h1 class="title is-4" style="font-family: cursive;">PhotoApp</h1>
-          <% end %>
-          <div class="navbar-burger burger" data-target="navbarExampleTransparentExample">
+      <div class="navbar-brand">
+        <%= link_to root_path, class: "navbar-item" do %>
+          <h1 class="title is-4" style="font-family: cursive;">PhotoApp</h1>
+        <% end %>
+        <div class="navbar-burger burger" data-target="navbarExampleTransparentExample">
+          <span class="nav-toggle">
             <span></span>
             <span></span>
             <span></span>
-          </div>
+          </span>
         </div>
+      </div>
       
       <% if user_signed_in? %>
         <div id="navbarExampleTransparentExample" class="navbar-menu">
@@ -57,15 +59,6 @@
                 </p>
               </div>
             </div>
-          </div>
-        </div>
-      <% else %>
-        <div id="navbarExampleTransparentExample" class="navbar-menu">
-          <div class="navbar-item">
-            <%= link_to "写真一覧", photos_path, class: "button is-default" %>
-          </div>
-          <div class="navbar-item">
-            <%= link_to "ユーザー一覧", users_path, class: "button is-default" %>
           </div>
         </div>
       <% end %>
