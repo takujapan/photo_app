@@ -1,6 +1,6 @@
 <% provide(:title, "My page") %>
 
-<section class="section profile-color">
+<section class="section">
   <div class="contaner">
     <div class="columns is-centered">
       <div class="column is-8">
@@ -16,14 +16,35 @@
                 <td class="is-size-4">
                   <strong><%= @user.username %></strong>
                 </td>
+                <td>
+                <% if user_signed_in? && current_user != @user %>
+                  <% if current_user.active_relationships.exists?(target_user_id: @user.id) %>
+                    <%= link_to user_follow_path(@user), method: :delete, class: "unfollow button is-default is-small" do %>
+                      <i class="fas fa-user-check fa-lg"></i>
+                    <% end %>
+                  <% else %>
+                    <%= link_to 'フォローする', user_follow_path(@user), method: :post, class: " button is-info is-small" %>
+                  <% end %>
+                <% end %>
+                </td>
                 <% if @user.id == current_user.id %>
                   <td class="is-size-4">
                     <%= @user.email %>
                   </td>
                   <td>
-                    <%= link_to "プロフィールを編集", edit_user_path(@user), class: "button is-default" %>
+                    <%= link_to "プロフィールを編集", edit_user_path(@user), class: "button is-default is-small" %>
                   </td>
                 <% end %>
+              </tr>
+            </table>
+            <table class="table">
+              <tr>
+                <td>
+                  <%= link_to 'フォロワー', user_followers_path(@user) %>
+                </td>
+                <td>
+                  <%= link_to 'フォロー中', user_followings_path(@user) %>
+                </td>
               </tr>
             </table>
             <table class="table is-fullwidth">
@@ -38,6 +59,7 @@
       </div>
     </div>
   </div>
+  <hr>
 </section>
 <section class="section">
   <div class="container">

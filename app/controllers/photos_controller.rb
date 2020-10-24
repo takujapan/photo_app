@@ -2,7 +2,7 @@ class PhotosController < ApplicationController
   before_action :authenticate_user!, except: [:index]
   
   def index
-    @photos = Photo.all
+    @feeds = Photo.where(user_id: [current_user.id, *current_user.following_ids]).order(created_at: :desc)
   end
 
   def show
@@ -17,7 +17,7 @@ class PhotosController < ApplicationController
     @photo = Photo.new(photo_params)
     @photo.user_id = current_user.id
     if @photo.save
-      redirect_to photo_path(@photo), notice: '投稿に成功しました'
+      redirect_to photos_path(@photo), notice: '投稿に成功しました'
     else
       render :new
     end
