@@ -1,6 +1,7 @@
 class Photo < ApplicationRecord
   belongs_to :user
   has_many   :likes, dependent: :destroy
+  has_many   :comments
   attachment :image
   default_scope -> { self.order(created_at: :desc) }
   

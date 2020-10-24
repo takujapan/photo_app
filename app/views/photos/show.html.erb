@@ -12,25 +12,58 @@
           </div>
           <div class="card-content">
             <div>
-                <% if current_user.already_liked?(@photo) %>
-                  <%= link_to photo_likes_path(@photo), method: :delete do %>
-                    <i class="fas fa-heart heart_red fa-2x"></i>
-                  <% end %>
-                <% else %>
-                  <%= link_to photo_likes_path(@photo), method: :post do %>
-                    <i class="far fa-heart heart_red fa-2x"></i>
-                  <% end %>
+              <% if current_user.already_liked?(@photo) %>
+                <%= link_to photo_likes_path(@photo), method: :delete do %>
+                  <i class="fas fa-heart heart_red fa-2x"></i>
                 <% end %>
-                <%= @photo.likes.count %>
-              </div>
+              <% else %>
+                <%= link_to photo_likes_path(@photo), method: :post do %>
+                  <i class="far fa-heart heart_red fa-2x"></i>
+                <% end %>
+              <% end %>
+              <%= @photo.likes.count %>
+            </div>
             <div class="is-size-3">
               <%= link_to user_path(@photo.user) do %>
                 <%= @photo.user.username %>
               <% end %>
             </div>
             <div>
-              <p><%= simple_format @photo.caption %></p>
+              <%= simple_format @photo.caption %>
             </div>
+            
+            <div>
+              <% @photo.comments.each do |comment| %>
+                <div>
+                  <%= link_to comment.user.username, [comment.user] %>
+                  <%= comment.body %>
+                </div>
+                <% if comment.user == current_user %>
+                  <div>
+                    <%= link_to [@photo, comment], method: :delete do %>
+                      <i class="fas fa-trash"></i>
+                    <% end %>
+                  </div>
+                <% end %>
+              <% end %>
+            </div>
+            <hr>
+            <div>
+             <% if user_signed_in? %>
+                <% if @comment.errors.any? %>
+                  <% @comment.errors.full_messages.each do |message| %>
+                    <div><%= message %></div>
+                  <% end %>
+                <% end %>
+                <%= form_with model: [@photo, @comment], local: true do |f| %>
+                  <div class="field">
+                    <%= f.text_field :body, class: 'input' %>
+                  </div>
+                  <%= f.submit class: 'button is-default' %>
+                <% end %>
+              <% end %>
+            </div>
+            
             <div class="has-text-right"> 
               <% if @photo.user.id == current_user.id %>
                 <%= link_to "編集", edit_photo_path(@photo), class: "button is-default" %>

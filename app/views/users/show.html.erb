@@ -40,10 +40,15 @@
             <table class="table">
               <tr>
                 <td>
+                  投稿<strong><%= @user.photos.count %></strong>件
+                </td>
+                <td>
                   <%= link_to 'フォロワー', user_followers_path(@user) %>
+                  <strong><%= @user.followers.count %>人</strong>
                 </td>
                 <td>
                   <%= link_to 'フォロー中', user_followings_path(@user) %>
+                  <strong><%= @user.followings.count %>人</strong>
                 </td>
               </tr>
             </table>
