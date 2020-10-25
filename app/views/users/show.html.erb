@@ -19,11 +19,9 @@
                 <td>
                 <% if user_signed_in? && current_user != @user %>
                   <% if current_user.active_relationships.exists?(target_user_id: @user.id) %>
-                    <%= link_to user_follow_path(@user), method: :delete, class: "unfollow button is-default is-small" do %>
-                      <i class="fas fa-user-check fa-lg"></i>
-                    <% end %>
+                    <%= link_to 'フォロー中',  user_follow_path(@user), method: :delete, class: "unfollow button is-default is-small" %>
                   <% else %>
-                    <%= link_to 'フォローする', user_follow_path(@user), method: :post, class: " button is-info is-small" %>
+                    <%= link_to 'フォローする', user_follow_path(@user), method: :post, class: " button is-info is-small is-small" %>
                   <% end %>
                 <% end %>
                 </td>
