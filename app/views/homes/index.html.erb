@@ -1,0 +1,53 @@
+<% if user_signed_in? %>
+  <section class="section home-image">
+    <article class="media">
+      <div class="media-content">
+        <div class="content has-text-centered">
+          <div class="home-page">
+            <p>
+              <strong class="home-title" style="font-family: cursive;">PhotoApp</strong>
+            </p>
+            <p class="home-subtitle">Welcome to PhotoApp</p>
+          </div>
+        </div>
+      </div>
+    </article>
+    <br>
+    <div class="columns is-centered">
+      <div class="column">
+        <figure>
+          <div class="main-image"></div>
+        </figure>
+      </div>
+    </div>
+  </section>
+<% else %>
+  <section class="section home-image">
+    <article class="media">
+      <div class="media-content">
+        <div class="content has-text-centered">
+          <div class="home-page">
+            <p>
+              <strong class="home-title" style="font-family: cursive;">PhotoApp</strong>
+            </p>
+            <p class="home-subtitle">Welcome to PhotoApp</p>
+          </div>
+        </div>
+        <div class="columns is-centered has-text-centered">
+          <div class="column is-5">
+            <%= link_to "ログイン", new_user_session_path, class: "button is-default is-small" %>
+            <%= link_to "新規登録", new_user_registration_path, class: "button is-default is-small" %>
+          </div>
+        </div>
+      </div>
+    </article>
+    <br>
+    <div class="columns is-centered">
+      <div class="column">
+        <figure>
+          <div class="main-image"></div>
+        </figure>
+      </div>
+    </div>
+  </section>
+<% end %>

@@ -1,0 +1,122 @@
+<% provide(:title, "My page") %>
+
+<section class="section">
+  <div class="contaner">
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="columns is-centered">
+          <div class="column is-2">
+            <figure class="image is-128x128" style="margin-left: auto; margin-right: auto;">
+              <%= attachment_image_tag @user, :profile_image, fallback: "no-image.png", class: "profile_image is-rounded" %>
+            </figure>
+          </div>
+          <div class="column is-8">
+            <table class="table is-fullwidth">
+              <tr>
+                <td class="is-size-4">
+                  <strong><%= @user.username %></strong>
+                </td>
+                <td>
+                <% if user_signed_in? && current_user != @user %>
+                  <% if current_user.active_relationships.exists?(target_user_id: @user.id) %>
+                    <%= link_to 'フォロー中',  user_follow_path(@user), method: :delete, class: "unfollow button is-default is-small" %>
+                  <% else %>
+                    <%= link_to 'フォローする', user_follow_path(@user), method: :post, class: " button is-info is-small is-small" %>
+                  <% end %>
+                <% end %>
+                </td>
+                <% if @user.id == current_user.id %>
+                  <td class="is-size-4">
+                    <%= @user.email %>
+                  </td>
+                  <td>
+                    <%= link_to "プロフィールを編集", edit_user_path(@user), class: "button is-default is-small" %>
+                  </td>
+                <% end %>
+              </tr>
+            </table>
+            <table class="table">
+              <tr>
+                <td>
+                  投稿<strong><%= @user.photos.count %></strong>件
+                </td>
+                <td>
+                  <%= link_to 'フォロワー', user_followers_path(@user) %>
+                  <strong><%= @user.followers.count %>人</strong>
+                </td>
+                <td>
+                  <%= link_to 'フォロー中', user_followings_path(@user) %>
+                  <strong><%= @user.followings.count %>人</strong>
+                </td>
+              </tr>
+            </table>
+            <table class="table is-fullwidth">
+              <tr>
+                <td>
+                  <%= @user.profile %>
+                </td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <hr>
+</section>
+<section class="section">
+  <div class="container">
+    <div class="columns is-multiline">
+      <% @user.photos.each do |photo| %>
+        <div class="column is-4">
+          <div class="card">
+            <div class="card-image">
+              <figure class="image is-4by3">
+                <%= attachment_image_tag photo, :image %>
+              </figure>
+            </div>
+            <div class="card-content">
+              <div class="media">
+                <div class="media-content">
+                    <% if current_user.already_liked?(photo) %>
+                      <%= link_to photo_likes_path(photo), method: :delete do %>
+                        <i class="fas fa-heart heart_red fa-lg"></i>
+                      <% end %>
+                    <% else %>
+                      <%= link_to photo_likes_path(photo), method: :post do %>
+                        <i class="far fa-heart heart_red fa-lg"></i>
+                      <% end %>
+                    <% end %>
+                    <%= photo.likes.count %>
+                  <%= link_to photo_path(photo), class: "panel-block" do %>
+                    <span class="panel-icon">
+                      <i class="fas fa-book" aria-hidden="true"></i>
+                    </span>
+                    写真を見る
+                  <% end %>
+                  <% if @user.id == current_user.id %>
+                    <%= link_to edit_photo_path(photo), class: "panel-block" do %>
+                      <span class="panel-icon">
+                        <i class="fas fa-edit"></i>
+                      </span>
+                      写真を編集する
+                    <% end %>
+                    <%= link_to photo_path(photo), method: :delete, data: {confirm: "削除しますか？"}, class: "panel-block" do %>
+                      <span class="panel-icon">
+                        <i class="fas fa-trash"></i>
+                      </span>
+                      写真を削除する
+                    <% end %>
+                  <% end %>
+                </div>
+              </div>
+              <div class="content is-size-7 has-text-weight-light">
+                <%= photo.updated_at.strftime("%Y-%m-%d %H:%M") %>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</section>
